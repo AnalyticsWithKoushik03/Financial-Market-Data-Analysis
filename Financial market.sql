@@ -1,0 +1,35 @@
+-- CREATE DATABASE financial_market_analysis;
+USE financial_market_analysis;
+-- ALTER TABLE fnancial_market RENAME financial_market;
+SELECT * FROM financial_market;
+SELECT Stock_Symbol, Close_Price  FROM financial_market;
+SELECT COUNT(*) AS total_transactions FROM financial_market;
+SELECT MAX(Close_Price) AS max_closing_price FROM financial_market;
+SELECT MIN(Close_Price) AS min_closing_price FROM financial_market;
+SELECT DISTINCT Stock_Symbol FROM financial_market;
+SELECT * FROM financial_market where Close_Price > Open_Price;
+SELECT Stock_Symbol, COUNT(*) AS total_records FROM financial_market GROUP BY Stock_Symbol ORDER BY total_records DESC;
+SELECT SUM(Volume) AS total_volume FROM financial_market;
+SELECT Volume FROM financial_market WHERE Volume > 500000;
+SELECT Stock_Symbol, AVG(Close_Price) AS avg_close_price FROM financial_market GROUP BY Stock_Symbol ORDER BY avg_close_price DESC;
+SELECT Stock_Symbol, SUM(Volume) AS total_trading_volume FROM financial_market GROUP BY Stock_Symbol ORDER BY total_trading_volume DESC;
+SELECT Stock_Symbol, MAX(Close_Price) AS high_close_price FROM financial_market GROUP BY Stock_Symbol ORDER BY high_close_price DESC;
+SELECT Stock_Symbol, AVG(Close_Price) AS avg_price FROM financial_market GROUP BY Stock_Symbol ORDER BY avg_price ASC LIMIT 1;
+SELECT Sector, SUM(Market_Cap) AS total_market_cap FROM financial_market GROUP BY Sector ORDER BY total_market_cap DESC;
+SELECT Sector, COUNT(*) AS total_transaction FROM financial_market GROUP BY Sector ORDER BY total_transaction DESC;
+SELECT Stock_Symbol, AVG(Market_Cap) AS avg_market_cap FROM financial_market GROUP BY Stock_symbol ORDER BY avg_market_cap DESC;
+SELECT Stock_Symbol, Close_Price FROM financial_market ORDER BY Close_Price DESC LIMIT 5;
+SELECT Sector, SUM(Volume) AS total_volume FROM financial_market GROUP BY Sector ORDER BY total_volume DESC;
+SELECT Stock_Symbol, AVG(Close_Price) AS avg_price FROM financial_market GROUP BY Stock_Symbol HAVING AVG(Close_Price) > 500;
+SELECT Stock_Symbol, Open_Price, Close_Price, (Close_Price - Open_Price) AS profit_loss FROM financial_market;
+SELECT CASE WHEN Close_Price > Open_Price THEN "profit" ELSE "loss" END AS status, COUNT(*) AS total_days FROM financial_market GROUP BY status;
+SELECT Stock_Symbol, AVG(Close_Price - Open_Price) AS avg_profit FROM financial_market GROUP BY Stock_Symbol ORDER BY avg_profit DESC;
+SELECT Stock_Symbol, AVG(Close_Price - Open_Price) AS avg_profit FROM financial_market GROUP BY Stock_Symbol ORDER BY avg_profit DESC LIMIT 1;
+SELECT Stock_Symbol, High_Price, Low_Price, (High_Price - Low_Price) AS volatility FROM financial_market;
+SELECT Stock_Symbol, AVG(High_Price - Low_Price) AS avg_volatility FROM financial_market GROUP BY Stock_Symbol ORDER BY avg_volatility DESC;
+SELECT Stock_Symbol, AVG(High_Price - Low_Price) AS avg_volatility FROM financial_market GROUP BY Stock_Symbol ORDER BY avg_volatility DESC LIMIT 1;
+SELECT stock_symbol, open_price, close_price, ((close_price - open_price) / open_price) * 100 AS price_change_percent
+FROM financial_market WHERE ((close_price - open_price) / open_price) * 100 > 10;
+SELECT stock_symbol, volume FROM financial_market WHERE volume > (SELECT AVG(volume) FROM financial_market);
+SELECT stock_symbol FROM financial_market GROUP BY stock_symbol HAVING MIN(close_price - open_price) > 0;
+
